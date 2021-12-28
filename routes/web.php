@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('list', [UsersController::class,'show']);
 
 Route::get('users/{id}', [UsersMetaController::class,'index']);

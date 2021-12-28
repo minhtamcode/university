@@ -15,4 +15,6 @@ class wp_users extends Authenticatable
         'user_email'
     ];
     use HasFactory;
+
+    protected $table = 'wp_users';
 }

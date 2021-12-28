@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'display_name',
+        'user_login',
+        'user_pass',
+        'user_registered',
     ];
 
     /**
@@ -41,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    protected $table = 'wp_users';
+    public $primaryKey = 'ID';
+    public $timestamps = false;
 }
