@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'name_login' => ['required', 'string', 'max:255' ,'unique:wp_users,user_login'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:wp_users,user_login'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -43,10 +44,10 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'display_name' => $request->name,
-            'user_login' => $request->email,
+            'user_login' => $request->name_login,
             'user_email' => $request->email,
             'user_pass' => wp_hash_password($request->password),
-            'user_registered' => Date('Y-m-d H:i:s'),
+            'user_registered' => Date('Y-m-d H:m:s'),
         ]);
 
         event(new Registered($user));
